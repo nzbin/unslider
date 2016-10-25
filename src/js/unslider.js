@@ -20,6 +20,7 @@
 	}
 
 	$.Unslider = function(context, options) {
+
 		var self = this;
 
 		//  Create an Unslider reference we can use everywhere
@@ -100,7 +101,12 @@
 			swipe: true,
 			// Swipe threshold -
 			// lower float for enabling short swipe
-			swipeThreshold: 0.2
+			swipeThreshold: 0.2,
+
+			// -----------------------------
+			// unslider 1.0 has pause option
+			// pause on hover (boolean)
+			hoverPause: false
 		};
 
 		//  Set defaults
@@ -154,6 +160,10 @@
 			//  If autoplay is set to true, call self.start()
 			//  to start calling our timeouts
 			self.options.autoplay && self.start();
+
+			// ----------------------------------------------
+			// If hoverPause is set to true, call self.stop()
+			self.options.hoverPause && self.$container.hover(function(){self.stop();},function(){self.start()});
 
 			//  We should be able to recalculate slides at will
 			self.calculateSlides();
